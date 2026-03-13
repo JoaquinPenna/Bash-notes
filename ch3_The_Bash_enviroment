@@ -1,0 +1,37 @@
+In this chapter it is discussed how the bash enviroment can be influenced
+
+.1.1 Shell init files - System-wide config files
+
+ • /etc/profile
+ this file is read when the shell is invoked interactively or as sh
+ Usually this file sets some shell variables and sometimes it has the umask configuration.
+ and sometimes it has pointers to the /etc/inputrc or/and /etc/profile.d files
+
+ all settings you want applied to your users' enviroment should be here
+
+ • /etc/bashrc
+ this config is bash specific, not like /etc/profile. in some cases ~/.bashrc points to this file for configuration upon login
+
+.1.2 Individual user configuration files
+
+ • ~/.bash_profile
+ preferred config file for configuring user evn individually
+
+ • ~/.bash_login
+ specific settings only excecuted on login, this file is read in the absence of  ~/.bash_profile
+
+ • ~/.profile
+ in the absence of ~/.bash_profile and ~/.bash_login, this is read
+
+ • ~/.bashrc
+ when you open a terminal window manually, you do not have to log in. in that case, bash searches for this file
+
+ • ~/.bash_logout
+ this file contains instuctions for the logout procedure
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.2 Variables
+
+shell variables are uppercase by convention. there are 2 types of variables.
+

@@ -1,0 +1,36 @@
+1.3. Excecuting the script
+
+Para que funcione, un script debe tener los permisos de ejecucion correctos, para poder correr como cualquier otro commando.
+
+Es preferible ejecutar scripts en una subshell ya que variables y aliases creados son olvidados una vez termina la ejecucion de este
+
+Se puede ejecutar el script utilizando 
+	./script.sh 
+o especificando la shell haciendo
+	bash script.sh
+esto creara una subshell para ejecutarlo.
+
+Si quieres ejecutar el script en la shell actual, tienes que hacer source
+	source script.sh
+
+On the first line of the script, with the shebang, the shell you want to run the script is specified, for example:
+	#!/bin/bash
+runs the script with the bash shell
+
+
+2.2. Adding comments
+
+everything after a # on a line is ignored by the shell
+
+
+3.*. Debugging Bash scripts 
+
+Ejecutando el script en una subshell con la flag -x nos da extra herramientas para el debugeado.
+
+Si queremos debugear solo una parte del script podemos correrlo normalmente pero agregar
+	set -x
+Para empezar la parte que queremos debugear, y hacer
+	set +x 
+Para terminar de debugear.
+
+podemos checkear añadiendo echo en los comandos y variables que deseamos

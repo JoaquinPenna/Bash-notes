@@ -1,0 +1,41 @@
+When the shell is started, it reads its configuration files. The most important are:
+ /etc/profile
+ ~/.bash_profile
+ ~/.bashrc
+
+
+When running a normal program, that exists in compiled form on your system. a new process is created because Bash makes a copy of itself. which inherits the enviroment, but the PID is different. this is called forking.
+
+After this, the virtual memory space given to the child is overwritten with new data through an exec call by the system
+
+This fork-and-exec switches old commands with new, maintaining the enviroment. the mechanism is used for all Linux processes, even the first process init, is forked during boot in the bootstrapping procedure.
+
+Built-in commands are contained within the shell. When the name of a built-in command is used as the first word of a command, the shell executes it without creating a new process.
+
+ 
+. Shell syntax:
+	if input is not a comment, the shell reads it and divides it into words and operators, which are then translated into tokens; all separated by metacharacters.
+	Then the shell parses these tokes intos simple and compund commands.
+	After breaking tokens into lists of filenames and commands and arguments, it executes said commands.
+	optionally it waits for the command to complete and gets its exit status.
+
+. Shell functions:
+	Shell functions are used to group commands, giving the a simple group name for later excecution.
+	When the name of a shell funtion is used as a simple command, the list of command is excecuted.
+	they are excecuted in the current shell context
+
+. Shell parameters
+	 parameters are entitys that store values, like a variable stores a name. these variabeles have a stored value and 0 or more attributes, and they are creatd using the declare shell command and they can be removed using the unset built-in
+	
+. Executing commands
+	When executing a command:
+	- Words that the parser has marked as variable assignment or redirections are seved for later. The rest are expanded.
+	- The first word after the expansion is taken to be the command name, the rest are considered arguments.
+	- The redirections are performed.
+
+
+. Order and logic:
+	Para acelerar el proceso de desarrollo, se recomienda hacer una lista de tareas que debe realizar el script, pudiendo hacer referencia a cada tarea con un numero.
+	Utilizar el lenguaje hablado para definir la logica del programa antes de desarrollarlo
+
+
