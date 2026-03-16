@@ -19,3 +19,42 @@ or if you gotta do multiple changes, you should put it on a script like:
 .2 The print program
 
 .2.1 Printing selected fields
+
+when reading, awk splits lines into fields using IF (field separators, different from bash IFS but do the same). the variables $1, $2, ..., $n hold the values to the n-th field
+the awk print command allows us to print this fields of specified input, so by doing
+	ls -l | awk '{ print $9 $5 }'
+we would print the field 9 and 5 of EVERY line of the output of ls -l
+
+you can add tabs and strings on the awk command to make it look better like
+	ls -l | awk '{ print "frsjio" $9 "\t" $5}'
+
+.2.3 The print command and regular expressions
+
+a regular expression can be used as a pattern by enclosing it in '/', and the syntax would be:
+	awk 'EXPRESSION {PROGRAM}' file(s)
+for example
+	df -h | awk '/dev\/hd/ { print $6 "\t" $5 }'
+prints the 6 and 5 field of the lines matching the pattern dev/hd
+
+.2.4 Special patterns
+
+to print something before the main command, you can use the BEGIN statement like:
+	ls -l | awk 'BEGIN { print "Files:\n" } { print $9 }'
+or the END statement to insert texet after the input is processed
+
+.3 Gawk variables
+
+.3.1 The input field separator
+the field separator, which is a char or a regex, is a delimiter to for awk to split lines. it is represented by the IF built-in var
+you can change the value when running an awk program with the BEGIN statement like:
+	awk 'BEGIN { FS=":" } { print $1 $2 }' /text.txt
+
+.3.2 The output separators
+by putting commas to separate the arguments on the print command, they are printed with spaces between them, and just like with IF you can change OFS on the BEGIN statement
+
+also, for every time awk prints somethin from a print command, it outputs a stringcalled output record separator or ORS which can also be changed like ORS and FS
+
+and there is a NR built-in var that holds the number of records processed, incremented afer reading a new input line
+
+.3.4 User define variables
+you can define your own variables with awk by using the = operator

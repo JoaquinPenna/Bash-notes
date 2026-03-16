@@ -1,0 +1,2 @@
+the positional parameters $1, $2, ..., $n are use to refer to command line arguments, with $# being the number of command line arguments and $0 being the name of the script
+

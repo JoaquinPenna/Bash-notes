@@ -1,0 +1,8 @@
+		8.2. Catching user input
+	.2.1. Using the read built-in command
+the syntax of the read command is:
+	read [options] NAME1, NAME2, ..., NAMEN
+when running it, one line is read from stdin, the 1st word is assigned to NAME1, the second to NAME2 and so on.
+the chars on the IFS is used to divide the input into lines
+
+	

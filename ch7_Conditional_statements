@@ -1,0 +1,49 @@
+		7.1. Introduction to if
+	.1.1. General
+the if construction allows you to spesify different courses of acction depending on condition, with its syntax being:
+	if TEST-COMMANDS; then CONSEQUENT-COMMANDS; fi
+the TEST-COMMAND is usualy a numerical or sting comparison, but it can be any command that returns 0 if it succeds and any other if it fails
+on the book there is a list of "primaries" used in TEST-COMMAND in between sqare brackets
+
+the CONSEQUENT-COMMANDS can be any valid command
+	
+	.1.2. Simple application of if
+the ? variable holds the exit status of the previously excecuted command
+
+		7.2. More advanced if usage
+	.2.1. if/then/else constructs
+this is sed to give an alternative output if TEST-COMMANDS is false
+
+	.2.2. if/then/elif/else constructs
+this is the full form of the if statement:
+	if TEST-COMMANDS1;then
+	CONSEQUENT-COMMANDS;
+	elif TEST-COMMANDS2;then
+	CONSEQUENT-COMMANDS2;
+	else ALTERANTE-COMMANDS;
+	fi
+only one of this consequent or alternate commands is excecuted, and the return status is the exis status of the last excecuted command or 0 if no condition is true
+
+	.2.4. Boolean operations
+the boolean operators "AND" (&&) and "OR" (||) can be used in our code to make it shorter
+
+	.2.5. Using the exit statement
+the exit statement terminates the execution of the entire script, this statement takes an otional argument, stored in $? that is the exit status code.
+a zero means that it ran succesfully
+	
+		7.3. Using case statements
+	.3.1. Simplified conditions
+nested if statements are ugly, case syntax is easier on long ifs:
+	case EXPRESSION in 
+	CASE1) 
+		COMMANDS1
+		;;
+	CASE2)
+		COMMANDS2
+		;;
+	CASEN
+		COMMANDSN
+		;;
+	esac
+
+
