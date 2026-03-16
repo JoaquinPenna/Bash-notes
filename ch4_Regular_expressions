@@ -1,0 +1,11 @@
+.1. Regular expressions
+
+.3.2. Character classes
+
+character classes can be specified with the syntax [:CLASS:] where CLASS is one of the following values
+"alnum", "alpha", "ascii", "blank", "cntrl", "digit", "graph", "lower", "print", "punct", "space", "upper", "word"
+or "xdigit".
+
+
+
+

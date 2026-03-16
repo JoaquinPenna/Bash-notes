@@ -1,0 +1,21 @@
+
+.1 Getting started with gawk
+
+.1.1 What is gawk?
+
+gawk is the gnu version of the UNIX awk, another stream editor.
+it searches fules for patterns of text and performs special actions when theres a match.
+
+since programs in awk are "data-driven" you only have to describe the data you want the program to work with and what to do when it finds it
+
+.1.2 Gawk commands
+
+when you run awk you specify an awk program that tells awk what to do, these are series of rules that specify the pattern to search and the action to perform.
+you can run a short awk program from the command line like:
+	awk PROGRAM inputfile(s)
+or if you gotta do multiple changes, you should put it on a script like:
+	awk -f PROGRAM-FILE inputfile(s)
+
+.2 The print program
+
+.2.1 Printing selected fields

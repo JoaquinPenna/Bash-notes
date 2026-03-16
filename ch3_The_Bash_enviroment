@@ -33,5 +33,147 @@ In this chapter it is discussed how the bash enviroment can be influenced
 
 .2 Variables
 
+.2.1 Types of variables
+
+running "set" with no options will display all variables including enviroment vars.
+
 shell variables are uppercase by convention. there are 2 types of variables.
+
+ - global variables or enviroment variables: available in all shells. you can see the with the env or printenv commands
+ - local variables: only available in the current shell.
+
+also we can divide them by content, with the types:
+ - string
+ - integer
+ - constant
+ - array
+
+.2.2 Creating variables
+
+to set a variable name, use:
+	VARNAME="value"
+but this variable is local, so its only available for the current shell, and child processes of this shell cant access it. 
+to make it available for subshells we use export, like so:
+	export VARNAME="value"
+
+.2.4 Reserved variables
+
+bash and sh reserve a lot of variables and you cant use them, there is a list in the book
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.3. Quoting characters
+
+.3.2. Escape characters
+they are used to remove the special meaning from the single character following it, except with newline. \ is used
+
+.3.3. Single quotes
+preserve the meaning of all chars wihin them
+
+.3.4. Double quotes
+preserve the meaning of all chas within then, except for $ `` and \
+\ only preserves meaning when followed by $
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.4. Shell expansion
+
+after a command is split into tokens, these are expanded, there are many types of expansion and whe will mention them in the order they are performed
+
+.4.2. Brace expansion
+
+brace expansion is a mechanism to create arbitrary strings, they take the form of a PEAMBLE, a series of comma-separated strings and a POSTSCRIPT, with both the PREAMBLE and POSTSCRIPT being optional, an example of this is:
+ sp{el,il,al}l
+which is expanded into
+ spill spell spall
+
+.4.3. Tilde expansion
+
+if a word begins with ~ , all characters up to a / (or all if there is none)
+are considered a tilde-prefix.
+if none of the chars in the tilde-prefix are quoted they (except ~) are treated as a login name.
+if this name is NULL then it is replaced with the HOME shell variable.
+if this variable is unset, then it is replaced with the home directory of the use excecuting the shell. this happens on cd ~
+
+if the tilde-prefix is "~+" the PWD replaces it. and if it is "~-" it is replaced by OLDPWD
+
+.4.4. Shell parameter and variable expansion
+
+the $ char introduces parameter expansion, command sucstitution or arithmetic expansion. this is done like 
+	${PARAMETER}
+If the first character of "PARAMETER" is an exclamation point, Bash uses the value of the variable formed
+from the rest of "PARAMETER" as the name of the variable; this variable is then expanded and that value is
+used in the rest of the substitution, rather than the value of "PARAMETER" itself. This is known as indirect
+expansion.
+
+.4.5. Command substitution
+
+this allows the standard output of a command to replace the command itself, this is done like this:
+	$(command)
+or like:
+	`command`
+this can be nested. if the substitution appears withind double quotes, wordsplitting and filename expansion are not performed on the results
+
+.4.6. Arithmetic expansion
+
+this allows the evaluation of arithmetic expression and substitution for the result, the form for this is:
+	$((EXPRESSION))
+los operadores son los mismos que en C
+
+constantes que empiezan con 0 son considerados octales, si empiezan con 0x o 0X son hexadecimales, otros numeros toman la forma "[BASE'#']N" donde BASE es un numero entre 2 y 64, y N es el numero en esa base
+
+.4.7. Process substitution
+
+only supported on systems that support named pipes (FIFOs) or the /dev/fd method of naming open files. It takes the form of
+	<(LIST)
+or
+	>(LIST)
+
+more information on this on 8.2.3
+
+.4.8 Word splitting
+ 
+$IFS: Internal Field Separators, its a shell variable containing  
+
+the shell scans the result of parameter expansion, command substitution and arithmetic expansion that did not occur within double quotes for word splitting.
+the shell treats each char of $IFS as a delimiter, and splits the results scanned into words on these chars
+
+(read the man page!!!!!!!)
+
+.4.9 File name expansion
+
+bash scans each word for the chars "*", "?" and "[". if one of these appears then the word is considered a pattern and is replaced by all the filenames that match the pattern.
+if nullglob is disbled, if there's no matches, the word is unchanged. if nullglob is enabled, it is removed.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.5. Aliases
+
+.5.1. What are aliases?
+
+an alias allows a string to be substituted for a word when it is used as the first word of a simple command.
+the shell maintais a list of alias that can be modified with the "alias" command, running it with no options dispplays the list of aliases
+
+for permanent use you may change the init files of your shell
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.6. More Bash options
+
+.6.1. Displaying options
+
+to display all shell options:
+	set -o
+
+.6.2. Changing options 
+
+options can be set when calling the shell, during shell operations or included in shell config files.
+to change the current enviroment temporarily use	
+	set -o OPTION	for enabling
+	set +o OPTION	for disabling
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
